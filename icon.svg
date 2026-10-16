@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <rect width="512" height="512" rx="128" fill="#020617"/>
+  <!-- Lingkaran Tasbih Digital -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#0f172a" stroke-width="24"/>
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#10b981" stroke-width="24" stroke-dasharray="18 22" stroke-linecap="round"/>
+  <!-- Pusat Indikator / Counter -->
+  <circle cx="256" cy="256" r="85" fill="#0f172a" stroke="#34d399" stroke-width="6"/>
+  <text x="256" y="278" font-family="system-ui, -apple-system, sans-serif" font-size="70" font-weight="900" fill="#34d399" text-anchor="middle">MY</text>
+  <circle cx="256" cy="80" r="16" fill="#6ee7b7"/>
+</svg>
