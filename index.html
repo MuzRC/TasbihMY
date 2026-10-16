@@ -415,12 +415,27 @@
     // Jalankan pemuatan data bila skrip sedia
     loadProgress();
 
-    // 7. Pendaftaran Service Worker (PWA Offline)
+    // 7. Pendaftaran Service Worker (Auto Force-Update Mechanism)
     if ('serviceWorker' in navigator) {
+      let refreshing = false;
+
+      // Auto-reload serta-merta bila Service Worker baru ambil alih
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          console.log('[TasbihMY] Versi baru dikesan. Memuat semula skrin secara automatik...');
+          window.location.reload();
+        }
+      });
+
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then((reg) => console.log('TasbihMY Service Worker Aktif!'))
-          .catch((err) => console.log('SW Pendaftaran Gagal:', err));
+          .then((reg) => {
+            console.log('[TasbihMY] Service Worker Aktif.');
+            // Paksa browser semak server untuk fail sw.js baru setiap kali dibuka
+            reg.update();
+          })
+          .catch((err) => console.error('[TasbihMY] SW Pendaftaran Gagal:', err));
       });
     }
   </script>
