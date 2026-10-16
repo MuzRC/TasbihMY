@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tasbihmy-v1.0.1';
+const CACHE_NAME = 'tasbihmy-v1.0.2';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -21,7 +21,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Fasa 2: Activate & bersihkan cache lama serta merta
+// Fasa 2: Activate & bersihkan cache versi lama serta merta
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -43,8 +43,7 @@ self.addEventListener('fetch', (event) => {
   const isHtml = req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html');
 
   if (isHtml) {
-    // NETWORK-FIRST untuk HTML: Tarik kod terbaru dari GitHub/server dulu.
-    // Jika tiada internet (offline), baru guna salinan cache.
+    // NETWORK-FIRST untuk HTML: Tarik kod terbaru dari server/GitHub dulu
     event.respondWith(
       fetch(req)
         .then((networkRes) => {
@@ -55,7 +54,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => caches.match('./index.html') || caches.match(req))
     );
   } else {
-    // CACHE-FIRST untuk aset media, CSS & font
+    // CACHE-FIRST untuk media, CSS, font
     event.respondWith(
       caches.match(req).then((cachedRes) => {
         if (cachedRes) return cachedRes;

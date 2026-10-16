@@ -1,11 +1,18 @@
 ============================================================
-TASBIHMY - PANDUAN PEMASANGAN CEPAT (PWA OFFLINE-READY)
+TASBIHMY - VERSI 1.0.2 (PWA OFFLINE-READY)
+Dibangunkan oleh: Musa Bin Sarudin
 ============================================================
+
+Apa yang baru dalam Versi 1.0.2:
+- Penambahan Penghulu Istighfar (Sayyidul Istighfar) teks Arab penuh, rumi & maksud.
+- Paparan kredit pemaju: Musa Bin Sarudin & lencana versi v1.0.2 pada antara muka aplikasi.
+- Enjin Force-Update pintar (Network-First & ControllerChange) untuk mengelakkan isu cache lama.
+- Pengoptimuman kotak teks boleh skrol (custom scroll) untuk teks zikir yang panjang.
 
 Kandungan Fail:
 1. index.html    - Kod antaramuka utama & enjin zikir
 2. manifest.json - Konfigurasi PWA (tajuk, tema gelap & ikon)
-3. sw.js         - Service Worker untuk keupayaan offline 100%
+3. sw.js         - Service Worker versi v1.0.2 (Auto Force-Update)
 4. icon-192.png  - Ikon aplikasi saiz standard (Android / Home Screen)
 5. icon-512.png  - Ikon aplikasi resolusi tinggi (Splash Screen)
 6. icon.svg      - Fail rekaan ikon vektor asli

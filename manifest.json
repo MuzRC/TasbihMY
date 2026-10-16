@@ -1,12 +1,12 @@
 {
   "name": "TasbihMY - Digital Tasbih",
   "short_name": "TasbihMY",
-  "description": "Aplikasi tasbih digital ringkas, moden dan mesra bateri untuk zikir harian.",
+  "description": "Aplikasi tasbih digital ringkas, moden dan mesra bateri untuk zikir harian. Dibangunkan oleh Musa Bin Sarudin.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#020617",
-  "theme_color": "#0f172a",
+  "theme_color": "#020617",
   "orientation": "portrait-primary",
   "lang": "ms",
   "icons": [

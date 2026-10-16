@@ -36,22 +36,31 @@
     }
     /* Safe Area Padding untuk telefon skrin bertakuk (Notch/Dynamic Island) */
     .safe-top {
-      padding-top: env(safe-area-inset-top, 1rem);
+      padding-top: env(safe-area-inset-top, 0.75rem);
     }
     .safe-bottom {
-      padding-bottom: env(safe-area-inset-bottom, 1rem);
+      padding-bottom: env(safe-area-inset-bottom, 0.75rem);
+    }
+    /* Custom thin scrollbar */
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(16, 185, 129, 0.3);
+      border-radius: 4px;
     }
   </style>
 </head>
 
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between overflow-hidden safe-top safe-bottom">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden safe-top safe-bottom">
 
   <!-- ================= HEADER ================= -->
-  <header class="px-5 py-3 border-b border-slate-800/80 flex justify-between items-center bg-slate-900/60 backdrop-blur">
+  <header class="px-5 py-3 border-b border-slate-800/80 flex justify-between items-center bg-slate-900/60 backdrop-blur sticky top-0 z-10">
     <div>
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
         <h1 class="text-xl font-black tracking-wider text-emerald-400">Tasbih<span class="text-white">MY</span></h1>
+        <span class="text-[10px] bg-emerald-950/90 border border-emerald-800 text-emerald-400 font-mono px-1.5 py-0.5 rounded-md font-bold">v1.0.2</span>
       </div>
       <p class="text-[11px] text-slate-400">Peringatan & Wirid Harian</p>
     </div>
@@ -72,13 +81,13 @@
   </header>
 
   <!-- ================= KANDUNGAN UTAMA ================= -->
-  <main class="flex-1 flex flex-col justify-between px-4 py-3 max-w-md mx-auto w-full">
+  <main class="flex-1 flex flex-col justify-between px-4 py-2.5 max-w-md mx-auto w-full">
     
     <!-- Bahagian Atas: Pilihan Zikir & Kad Paparan -->
-    <div class="space-y-3">
+    <div class="space-y-2.5">
       <!-- Dropdown Zikir -->
       <div>
-        <label for="zikirSelect" class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Pilih Zikir:</label>
+        <label for="zikirSelect" class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Pilih Zikir / Wirid:</label>
         <div class="relative">
           <select id="zikirSelect" onchange="onZikirChanged()" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl p-3 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 appearance-none font-medium">
             <!-- Pilihan dijanakan oleh JavaScript -->
@@ -90,9 +99,9 @@
       </div>
 
       <!-- Kad Teks Zikir (Arab, Rumi & Terjemahan) -->
-      <div class="bg-gradient-to-b from-slate-900/90 to-slate-900/50 border border-slate-800 rounded-2xl p-4 text-center shadow-lg min-h-[145px] flex flex-col justify-center">
-        <p id="arabicText" class="text-2xl md:text-3xl font-arabic text-emerald-300 leading-relaxed mb-1.5" dir="rtl"></p>
-        <p id="rumiText" class="text-xs text-slate-300 font-medium italic mb-1"></p>
+      <div class="bg-gradient-to-b from-slate-900/90 to-slate-900/50 border border-slate-800 rounded-2xl p-4 text-center shadow-lg min-h-[140px] max-h-[210px] overflow-y-auto custom-scroll flex flex-col justify-center">
+        <p id="arabicText" class="text-xl md:text-2xl font-arabic text-emerald-300 leading-relaxed mb-1.5" dir="rtl"></p>
+        <p id="rumiText" class="text-xs text-slate-300 font-medium italic mb-1.5 leading-snug"></p>
         <p id="meaningText" class="text-[11px] text-slate-400 leading-relaxed"></p>
       </div>
 
@@ -115,7 +124,7 @@
 
     <!-- Bahagian Tengah: Butang Tasbih Ergonomik -->
     <div class="flex flex-col items-center justify-center my-auto py-2">
-      <button id="counterButton" onclick="onTapCounter()" class="w-60 h-60 sm:w-64 sm:h-64 rounded-full bg-gradient-to-b from-slate-800 to-slate-900 border-4 border-emerald-500/30 shadow-[0_0_60px_rgba(16,185,129,0.12)] active:scale-95 transition-transform duration-100 flex flex-col items-center justify-center relative group focus:outline-none">
+      <button id="counterButton" onclick="onTapCounter()" class="w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-gradient-to-b from-slate-800 to-slate-900 border-4 border-emerald-500/30 shadow-[0_0_60px_rgba(16,185,129,0.12)] active:scale-95 transition-transform duration-100 flex flex-col items-center justify-center relative group focus:outline-none">
         
         <!-- Gelang visual kilat bila capai pusingan -->
         <div id="flashRing" class="absolute inset-0 rounded-full border-4 border-emerald-400 opacity-0 transition-opacity duration-300 pointer-events-none"></div>
@@ -141,10 +150,25 @@
 
   </main>
 
+  <!-- ================= FOOTER KREDIT & VERSI ================= -->
+  <footer class="mt-auto px-4 py-2 border-t border-slate-900/80 bg-slate-950 text-center">
+    <p class="text-[11px] text-slate-500 font-medium">
+      TasbihMY <span class="text-emerald-400 font-mono font-semibold">v1.0.2</span> &bull; Dibangunkan oleh <span class="text-slate-300 font-semibold">Musa Bin Sarudin</span>
+    </p>
+  </footer>
+
   <!-- ================= JAVASCRIPT LOGIK & ENGINE ================= -->
   <script>
     // 1. Senarai Lengkap Tasbih & Zikir
     const zikirDatabase = [
+      {
+        id: "sayyidul_istighfar",
+        name: "Penghulu Istighfar (Sayyidul Istighfar)",
+        arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+        rumi: "Allahumma Anta Rabbi, la ilaha illa Anta, khalaqtani wa ana 'abduka, wa ana 'ala 'ahdika wa wa'dika mastatha'tu, a'udzu bika min syarri ma shana'tu, abu'u laka bini'matika 'alayya, wa abu'u laka bidzanbi faghfir li, fa-innahu la yaghfirudz-dzunuba illa Anta.",
+        meaning: "Ya Allah, Engkau adalah Tuhanku, tiada Tuhan selain Engkau. Engkau yang menciptakan daku dan aku adalah hamba-Mu. Aku berada dalam ikrar dan janji-Mu semampuku. Aku berlindung kepada-Mu dari keburukan apa yang telah kuperbuat. Aku mengakui limpahan nikmat-Mu kepadaku dan aku mengakui dosaku kepada-Mu, maka ampunilah daku, sesungguhnya tiada yang dapat mengampuni dosa-dosa melainkan Engkau.",
+        defaultTarget: 3
+      },
       {
         id: "subhanallah",
         name: "Subhanallah (Tasbih Fatimah)",
@@ -216,14 +240,6 @@
         rumi: "Allahumma salli 'ala Sayyidina Muhammad wa 'ala aali Sayyidina Muhammad",
         meaning: "Ya Allah, cucurilah rahmat ke atas junjungan kami Nabi Muhammad dan ke atas keluarga baginda.",
         defaultTarget: 100
-      },
-      {
-        id: "sayyidul_istighfar",
-        name: "Sayyidul Istighfar (Penghulu Istighfar)",
-        arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ",
-        rumi: "Allahumma Anta Rabbii laa ilaaha illaa Anta, khalaqtanii wa anaa 'abduka, wa anaa 'alaa 'ahdika wa wa'dika mastatha'tu...",
-        meaning: "Ya Allah, Engkau Rabbku, tiada tuhan selain Engkau. Engkau menciptakanku dan aku hamba-Mu...",
-        defaultTarget: 3
       }
     ];
 
@@ -232,7 +248,7 @@
     let count = 0;
     let round = 0;
     let grandTotal = 0;
-    let currentTarget = 33;
+    let currentTarget = 3;
     let soundActive = true;
 
     // 2. Synthesizer Bunyi (Web Audio API - Jimat bateri & 100% offline)
@@ -392,14 +408,16 @@
       if (saved) {
         try {
           const s = JSON.parse(saved);
-          currentIdx = s.currentIdx || 0;
+          currentIdx = s.currentIdx !== undefined ? s.currentIdx : 0;
           count = s.count || 0;
           round = s.round || 0;
           grandTotal = s.grandTotal || 0;
           currentTarget = s.currentTarget !== undefined ? s.currentTarget : zikirDatabase[currentIdx].defaultTarget;
           soundActive = s.soundActive !== undefined ? s.soundActive : true;
           
+          if (currentIdx >= zikirDatabase.length) currentIdx = 0;
           selectElem.value = currentIdx;
+          
           if (!soundActive) {
             document.getElementById("soundText").innerText = "OFF";
             document.getElementById("soundText").className = "text-rose-400 font-bold";
@@ -408,6 +426,8 @@
         } catch(e) {
           console.error("Gagal muat memori lama", e);
         }
+      } else {
+        currentTarget = zikirDatabase[0].defaultTarget;
       }
       updateUI();
     }
